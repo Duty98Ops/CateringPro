@@ -59,7 +59,7 @@ export default function Dashboard() {
       {/* Header & Greeting */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight">Halo, Admin Catering!</h1>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-800 tracking-tight">Halo, Admin Catering!</h1>
           <p className="text-slate-500 mt-2 font-medium text-sm md:text-base">Pantau biaya bahan baku dapur Anda hari ini.</p>
         </div>
         <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-full shadow-sm w-fit">
@@ -69,7 +69,7 @@ export default function Dashboard() {
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
         {stats.map((stat, idx) => (
           <motion.div
             key={idx}
@@ -77,26 +77,26 @@ export default function Dashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <Card className="bg-white p-6 md:p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <div className="flex justify-between items-start mb-6">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{stat.title}</p>
-                <div className={`p-1.5 rounded-lg flex items-center gap-1 ${stat.trendType === 'up' ? 'text-emerald-600' : 'text-rose-500'}`}>
+            <Card className="bg-white p-6 md:p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300 h-full">
+              <div className="flex justify-between items-start mb-4 md:mb-6">
+                <p className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{stat.title}</p>
+                <div className={`p-1 rounded-lg flex items-center gap-1 ${stat.trendType === 'up' ? 'text-emerald-600' : 'text-rose-500'}`}>
                   {stat.trendType === 'up' ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                  <span className="text-[11px] font-black tracking-tight">{stat.trend}</span>
+                  <span className="text-[10px] md:text-[11px] font-black tracking-tight">{stat.trend}</span>
                 </div>
               </div>
               
-              <div className="flex items-end justify-between">
-                <h3 className="text-3xl font-black text-slate-800 tracking-tighter">
+              <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+                <h3 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tighter whitespace-nowrap">
                   Rp {stat.isK ? `${stat.amount.toLocaleString('id-ID')}k` : stat.amount.toLocaleString('id-ID')}
                 </h3>
                 
                 {/* Mini Chart */}
-                <div className="flex items-end gap-1.5 h-12 pb-1">
+                <div className="flex items-end gap-1.5 h-10 md:h-12 pb-1 shrink-0">
                   {stat.chart.map((val, i) => (
                     <div 
                       key={i} 
-                      className={`w-4 rounded-md transition-all duration-500 ${i === stat.chart.length - 1 ? stat.chartColor : stat.baseColor}`}
+                      className={`w-3 md:w-4 rounded-md transition-all duration-500 ${i === stat.chart.length - 1 ? stat.chartColor : stat.baseColor}`}
                       style={{ height: `${val}%` }}
                     ></div>
                   ))}

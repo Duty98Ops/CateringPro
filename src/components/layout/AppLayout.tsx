@@ -10,7 +10,7 @@ export default function AppLayout() {
         <AppSidebar />
         <main className="flex-1 flex flex-col h-full overflow-hidden">
           {/* Header */}
-          <header className="h-20 flex items-center justify-between px-4 md:px-10 bg-transparent shrink-0">
+          <header className="h-20 flex items-center justify-between px-4 md:px-6 lg:px-10 bg-transparent shrink-0">
             <div className="flex items-center gap-3 md:gap-6 flex-1 min-w-0">
               <div className="md:hidden">
                 <SidebarTrigger />
@@ -37,7 +37,7 @@ export default function AppLayout() {
             </div>
           </header>
 
-          <div className="flex-1 overflow-y-auto px-4 md:px-10 pb-10">
+          <div className="flex-1 overflow-y-auto px-4 md:px-6 lg:px-10 pb-10">
             <div className="max-w-7xl mx-auto">
               <Outlet />
             </div>

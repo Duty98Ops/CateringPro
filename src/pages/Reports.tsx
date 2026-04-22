@@ -41,13 +41,13 @@ export default function Reports() {
 
       <Tabs defaultValue="daily" className="space-y-8">
         <TabsList className="bg-white/60 p-1 md:p-2 rounded-[24px] h-auto self-start shadow-sm flex overflow-x-auto max-w-full no-scrollbar">
-          <TabsTrigger value="daily" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Harian</TabsTrigger>
-          <TabsTrigger value="weekly" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Mingguan</TabsTrigger>
-          <TabsTrigger value="monthly" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Bulanan</TabsTrigger>
+          <TabsTrigger value="daily" className="rounded-2xl px-6 md:px-8 lg:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Harian</TabsTrigger>
+          <TabsTrigger value="weekly" className="rounded-2xl px-6 md:px-8 lg:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Mingguan</TabsTrigger>
+          <TabsTrigger value="monthly" className="rounded-2xl px-6 md:px-8 lg:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Bulanan</TabsTrigger>
         </TabsList>
 
         <TabsContent value="daily">
-          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-8 lg:p-10">
             <div className="mb-8 md:mb-10 text-center md:text-left">
               <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Harian</h2>
               <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Perbandingan biaya 7 hari terakhir</p>
@@ -80,7 +80,7 @@ export default function Reports() {
         </TabsContent>
 
         <TabsContent value="weekly">
-          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-8 lg:p-10">
             <div className="mb-8 md:mb-10 text-center md:text-left">
               <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Mingguan</h2>
               <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Tren pengeluaran dalam satu bulan terakhir</p>
@@ -103,7 +103,7 @@ export default function Reports() {
         </TabsContent>
 
         <TabsContent value="monthly">
-          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-8 lg:p-10">
             <div className="mb-8 md:mb-10 text-center md:text-left">
               <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Bulanan</h2>
               <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Ringkasan biaya sepanjang tahun berjalan</p>
