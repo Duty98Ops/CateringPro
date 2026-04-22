@@ -28,80 +28,102 @@ export default function ExpenseList() {
   };
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Daftar Belanja</h1>
-        <p className="text-slate-500 mt-1">Kelola dan pantau semua transaksi bahan baku Anda.</p>
+    <div className="space-y-10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight">Daftar Belanja</h1>
+          <p className="text-slate-500 mt-2 font-medium text-sm md:text-base">Kelola dan pantau semua transaksi bahan baku Anda.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button variant="outline" className="h-10 md:h-12 bg-white rounded-2xl shadow-sm border-none px-4 md:px-6 flex items-center gap-2 text-slate-600 font-bold hover:shadow-md transition-all text-xs md:text-sm">
+            <Filter className="w-4 h-4" />
+            <span>Filter</span>
+          </Button>
+          <Button className="h-10 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-lg shadow-blue-200 px-6 md:px-8 font-bold transition-all text-xs md:text-sm">
+            Ekspor Data
+          </Button>
+        </div>
       </div>
 
-      <Card className="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden">
-        <CardHeader className="border-b border-slate-100 px-6 py-5 flex items-center justify-between pb-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <Input
-                placeholder="Cari nama bahan..."
-                className="pl-10 h-11 border-slate-200 rounded-xl focus-visible:ring-blue-500"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" className="h-11 rounded-xl border-slate-200 flex items-center gap-2">
-                <Filter className="w-4 h-4 text-slate-500" />
-                <span>Filter Tanggal</span>
-              </Button>
-              <Button className="h-11 rounded-xl bg-blue-600 hover:bg-blue-700">Ekspor Data</Button>
-            </div>
+      <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-2 overflow-hidden">
+        <div className="p-6 md:p-8">
+          <div className="relative max-w-md w-full">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input 
+              type="text" 
+              placeholder="Cari transaksi..."
+              className="w-full bg-slate-50/50 border-none rounded-2xl py-3 pl-11 pr-4 text-sm focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all outline-none placeholder:text-slate-400 border border-slate-100"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader className="bg-slate-50/50">
-              <TableRow className="border-none">
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest">Tanggal</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest">Bahan</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest">Qty</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest">Unit</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest text-right pr-6">Total Biaya</TableHead>
-                <TableHead className="w-[80px] pr-6"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="divide-y divide-slate-50">
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50/50">
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest min-w-[120px]">Tanggal</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest min-w-[150px]">Nama Bahan</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Kategori</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Qty</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Total Biaya</th>
+                <th className="w-[80px] px-4 md:px-8 py-4"></th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-50">
               {filteredExpenses.map((expense) => (
-                <TableRow key={expense.id} className="hover:bg-slate-50/50 transition-colors border-none">
-                  <TableCell className="px-6 py-4 text-sm font-medium text-slate-500">{expense.date}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm font-bold text-slate-800">{expense.name}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm text-slate-600">{expense.qty}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm text-slate-600">{expense.unit}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm font-black text-right pr-6 text-slate-900">{formatIDR(expense.total)}</TableCell>
-                  <TableCell className="pr-6 text-right">
+                <tr key={expense.id} className="hover:bg-slate-50/50 transition-colors group">
+                  <td className="px-4 md:px-8 py-5">
+                    <span className="text-sm font-bold text-slate-600 truncate block max-w-[100px] md:max-w-none">
+                      {new Date(expense.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
+                    </span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5">
+                    <span className="text-sm font-bold text-slate-800">{expense.name}</span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5 text-center">
+                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest 
+                      ${expense.category === 'PROTEIN' ? 'bg-green-100 text-green-700' : 
+                        expense.category === 'BUMBU' ? 'bg-purple-100 text-purple-700' :
+                        expense.category === 'SAYUR' ? 'bg-emerald-50 text-emerald-600' :
+                        'bg-slate-100 text-slate-600'}`}>
+                      {expense.category}
+                    </span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5">
+                    <span className="text-sm font-bold text-slate-500 whitespace-nowrap">{expense.qty} {expense.unit}</span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5 text-right text-sm font-black text-blue-600 whitespace-nowrap">
+                    {formatIDR(expense.total)}
+                  </td>
+                  <td className="px-4 md:px-8 py-5 text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-slate-100 rounded-lg">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-white rounded-lg transition-colors">
                           <MoreVertical className="w-4 h-4 text-slate-400" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-40 rounded-xl">
-                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                      <DropdownMenuContent align="end" className="w-40 rounded-2xl border-none shadow-xl">
+                        <DropdownMenuItem className="flex items-center gap-2 cursor-pointer py-2 px-4 focus:bg-blue-50 focus:text-blue-600 transition-colors rounded-xl">
                           <Edit2 className="w-4 h-4" />
-                          <span>Edit</span>
+                          <span className="font-bold text-xs">Edit</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="flex items-center gap-2 cursor-pointer text-red-600 focus:text-red-600"
+                          className="flex items-center gap-2 cursor-pointer py-2 px-4 text-red-600 focus:text-red-700 focus:bg-red-50 transition-colors rounded-xl mt-1"
                           onClick={() => handleDelete(expense.id, expense.name)}
                         >
                           <Trash2 className="w-4 h-4" />
-                          <span>Hapus</span>
+                          <span className="font-bold text-xs">Hapus</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </TableCell>
-                </TableRow>
+                  </td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
-        </CardContent>
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );

@@ -18,6 +18,7 @@ export default function NewExpense() {
     qty: '',
     unit: 'kg',
     price: '',
+    category: 'PROTEIN'
   });
 
   const totalCost = useMemo(() => {
@@ -41,107 +42,122 @@ export default function NewExpense() {
   };
 
   return (
-    <div className="space-y-6 max-w-3xl mx-auto">
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild className="rounded-full hover:bg-slate-200">
+    <div className="space-y-10 max-w-4xl mx-auto">
+      <div className="flex items-center gap-4 md:gap-6">
+        <Button variant="outline" size="icon" asChild className="rounded-2xl h-10 w-10 md:h-12 md:w-12 bg-white border-none shadow-sm hover:shadow-md transition-all">
           <Link to="/dashboard">
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-slate-400" />
           </Link>
         </Button>
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Tambah Belanja</h1>
-          <p className="text-slate-500 mt-1">Input rincian belanja bahan baku baru.</p>
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight">Tambah Belanja</h1>
+          <p className="text-slate-500 mt-2 font-medium text-sm md:text-base">Input rincian belanja bahan baku baru untuk dapur Anda.</p>
         </div>
       </div>
 
-      <Card className="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 overflow-hidden">
-        <CardHeader className="bg-slate-50/50 border-b border-slate-100 p-8">
-          <CardTitle className="font-bold text-slate-800">Rincian Transaksi</CardTitle>
-          <CardDescription className="text-slate-500">Informasi ini akan tercatat dalam laporan bulanan Anda.</CardDescription>
-        </CardHeader>
-        <CardContent className="p-8 space-y-8">
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={handleSubmit}>
-            <div className="space-y-3 col-span-2 md:col-span-1">
-              <Label htmlFor="date" className="text-xs font-bold text-slate-400 uppercase tracking-widest">Tanggal</Label>
+      <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none overflow-hidden">
+        <div className="bg-slate-50/50 border-b border-slate-50 p-6 md:p-10">
+          <h2 className="text-lg md:text-xl font-bold text-slate-800">Rincian Transaksi</h2>
+          <p className="text-slate-500 mt-1 text-xs md:text-sm font-medium">Data ini akan digunakan untuk laporan pengeluaran otomatis.</p>
+        </div>
+        <CardContent className="p-6 md:p-10">
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 md:gap-y-8" onSubmit={handleSubmit}>
+            <div className="space-y-3">
+              <Label htmlFor="date" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Tanggal Transaksi</Label>
               <Input
                 id="date"
                 type="date"
-                className="h-12 rounded-xl focus:ring-blue-500 border-slate-200"
+                className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700"
                 value={formData.date}
                 onChange={(e) => handleChange('date', e.target.value)}
               />
             </div>
 
-            <div className="space-y-3 col-span-2 md:col-span-1">
-              <Label htmlFor="name" className="text-xs font-bold text-slate-400 uppercase tracking-widest">Nama Bahan Baku</Label>
+            <div className="space-y-3">
+              <Label htmlFor="category" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Kategori Bahan</Label>
+              <Select value={formData.category} onValueChange={(val) => handleChange('category', val)}>
+                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700">
+                  <SelectValue placeholder="Pilih kategori" />
+                </SelectTrigger>
+                <SelectContent className="rounded-2xl border-none shadow-xl">
+                  {['PROTEIN', 'BUMBU', 'SEMBAKO', 'SAYUR', 'LAINNYA'].map(c => (
+                    <SelectItem key={c} value={c} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-blue-50 focus:text-blue-600 transition-colors">{c}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-3 col-span-1 md:col-span-2">
+              <Label htmlFor="name" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Nama Bahan Baku</Label>
               <Input
                 id="name"
-                placeholder="cth: Ayam Fillet, Beras, dll"
-                className="h-12 rounded-xl focus:ring-blue-500 border-slate-200"
+                placeholder="cth: Ayam Fillet, Beras Ramos, dll"
+                className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700"
                 value={formData.name}
                 onChange={(e) => handleChange('name', e.target.value)}
               />
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="qty" className="text-xs font-bold text-slate-400 uppercase tracking-widest">Kuantitas</Label>
+              <Label htmlFor="qty" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Kuantitas</Label>
               <Input
                 id="qty"
                 type="number"
                 placeholder="0"
-                className="h-12 rounded-xl focus:ring-blue-500 border-slate-200"
+                className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700 uppercase"
                 value={formData.qty}
                 onChange={(e) => handleChange('qty', e.target.value)}
               />
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="unit" className="text-xs font-bold text-slate-400 uppercase tracking-widest">Satuan Unit</Label>
+              <Label htmlFor="unit" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Satuan Unit</Label>
               <Select value={formData.unit} onValueChange={(val) => handleChange('unit', val)}>
-                <SelectTrigger className="h-12 rounded-xl border-slate-200">
+                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700">
                   <SelectValue placeholder="Pilih satuan" />
                 </SelectTrigger>
-                <SelectContent className="rounded-xl">
-                  {['kg', 'liter', 'gram', 'pcs', 'karung', 'dus'].map(u => (
-                    <SelectItem key={u} value={u} className="cursor-pointer">{u}</SelectItem>
+                <SelectContent className="rounded-2xl border-none shadow-xl">
+                  {['kg', 'liter', 'gram', 'pcs', 'karung', 'dus', 'ikat'].map(u => (
+                    <SelectItem key={u} value={u} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-blue-50 focus:text-blue-600 transition-colors uppercase">{u}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
-            <div className="space-y-3 col-span-2">
-              <Label htmlFor="price" className="text-xs font-bold text-slate-400 uppercase tracking-widest">Harga Satuan (IDR)</Label>
+            <div className="space-y-3 col-span-1 md:col-span-2">
+              <Label htmlFor="price" className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Harga Satuan (IDR)</Label>
               <Input
                 id="price"
                 type="number"
                 placeholder="0"
-                className="h-12 rounded-xl focus:ring-blue-500 border-slate-200"
+                className="h-14 rounded-2xl bg-slate-50/50 border-slate-100 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all px-6 font-bold text-slate-700"
                 value={formData.price}
                 onChange={(e) => handleChange('price', e.target.value)}
               />
             </div>
 
-            <div className="col-span-2 mt-4">
+            <div className="col-span-1 md:col-span-2 mt-4 md:mt-6">
               <motion.div
-                initial={{ scale: 0.95 }}
+                initial={{ scale: 0.98 }}
                 animate={{ scale: 1 }}
-                className="bg-slate-50 border border-slate-200 p-6 rounded-2xl flex items-center justify-between shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
+                className="bg-blue-600 p-6 md:p-8 rounded-[32px] flex items-center justify-between shadow-2xl shadow-blue-500/30 overflow-hidden relative"
               >
-                <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Estimasi Biaya</p>
-                  <p className="text-3xl font-black text-slate-900 mt-1">{formatIDR(totalCost)}</p>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+                <div className="relative z-10">
+                  <p className="text-[10px] font-black text-blue-100 uppercase tracking-[0.2em]">Total Estimasi Biaya</p>
+                  <p className="text-2xl md:text-4xl font-black text-white mt-1 tracking-tighter">{formatIDR(totalCost)}</p>
                 </div>
-                <div className="bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-600/30">
-                  <Save className="w-6 h-6 text-white" />
+                <div className="bg-white/20 p-3 md:p-4 rounded-2xl relative z-10 backdrop-blur-sm shadow-xl">
+                  <Save className="w-6 h-6 md:w-8 md:h-8 text-white" />
                 </div>
               </motion.div>
             </div>
 
-            <div className="col-span-2 flex justify-end gap-3 pt-4">
-              <Button type="button" variant="ghost" className="h-12 rounded-xl px-8" asChild>
+            <div className="col-span-1 md:col-span-2 flex flex-col md:flex-row justify-end gap-3 md:gap-4 pt-4">
+              <Button type="button" variant="ghost" className="h-12 md:h-14 rounded-2xl px-10 font-bold text-slate-400 hover:text-slate-600 hover:bg-slate-50 order-2 md:order-1" asChild>
                 <Link to="/dashboard">Batal</Link>
               </Button>
-              <Button type="submit" className="h-12 rounded-xl px-12 bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-200">
+              <Button type="submit" className="h-12 md:h-14 rounded-2xl px-16 bg-blue-600 hover:bg-blue-700 text-white font-black shadow-xl shadow-blue-200 transition-all active:scale-95 order-1 md:order-2">
                 Simpan Transaksi
               </Button>
             </div>

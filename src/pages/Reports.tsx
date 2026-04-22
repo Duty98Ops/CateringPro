@@ -33,77 +33,95 @@ const chartConfig = {
 
 export default function Reports() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Laporan & Analisis</h1>
-        <p className="text-slate-500 mt-1">Analisis tren pengeluaran dapur Anda secara berkala.</p>
+        <h1 className="text-4xl font-bold text-slate-800 tracking-tight">Laporan & Analisis</h1>
+        <p className="text-slate-500 mt-2 font-medium">Analisis tren pengeluaran dapur Anda secara berkala.</p>
       </div>
 
-      <Tabs defaultValue="daily" className="space-y-6">
-        <TabsList className="bg-white border border-slate-100 p-1.5 rounded-2xl h-auto self-start">
-          <TabsTrigger value="daily" className="rounded-xl px-10 py-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all">Harian</TabsTrigger>
-          <TabsTrigger value="weekly" className="rounded-xl px-10 py-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all">Mingguan</TabsTrigger>
-          <TabsTrigger value="monthly" className="rounded-xl px-10 py-3 data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all">Bulanan</TabsTrigger>
+      <Tabs defaultValue="daily" className="space-y-8">
+        <TabsList className="bg-white/60 p-1 md:p-2 rounded-[24px] h-auto self-start shadow-sm flex overflow-x-auto max-w-full no-scrollbar">
+          <TabsTrigger value="daily" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Harian</TabsTrigger>
+          <TabsTrigger value="weekly" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Mingguan</TabsTrigger>
+          <TabsTrigger value="monthly" className="rounded-2xl px-6 md:px-12 py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-blue-200 transition-all text-slate-400 flex-1">Bulanan</TabsTrigger>
         </TabsList>
 
         <TabsContent value="daily">
-          <Card className="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100">
-            <CardHeader className="px-8 pt-8">
-              <CardTitle className="font-bold text-slate-800">Statistik Harian</CardTitle>
-              <CardDescription className="text-slate-500 font-medium tracking-wide">Perbandingan biaya 7 hari terakhir.</CardDescription>
-            </CardHeader>
-            <CardContent className="h-[400px] mt-4 px-8 pb-8">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+            <div className="mb-8 md:mb-10 text-center md:text-left">
+              <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Harian</h2>
+              <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Perbandingan biaya 7 hari terakhir</p>
+            </div>
+            <div className="h-[400px]">
               <ChartContainer config={chartConfig} className="h-full w-full">
-                <BarChart data={dailyData}>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tickMargin={10} />
+                <BarChart data={dailyData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                  <XAxis 
+                    dataKey="name" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 800 }} 
+                    tickMargin={20} 
+                  />
                   <YAxis hide />
-                  <Tooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="total" fill="var(--color-total)" radius={[8, 8, 0, 0]}>
+                  <Tooltip cursor={{ fill: '#f8fafc' }} content={<ChartTooltipContent />} />
+                  <Bar dataKey="total" fill="#f1f5f9" radius={[12, 12, 12, 12]}>
                     {dailyData.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill={index === dailyData.length - 1 ? '#2563eb' : '#94a3b8'} />
+                      <Cell 
+                        key={`cell-${index}`} 
+                        className="transition-all duration-300"
+                        fill={index === dailyData.length - 1 ? '#2563eb' : '#e2e8f0'} 
+                      />
                     ))}
                   </Bar>
                 </BarChart>
               </ChartContainer>
-            </CardContent>
+            </div>
           </Card>
         </TabsContent>
 
         <TabsContent value="weekly">
-          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-            <CardHeader>
-              <CardTitle>Statistik Mingguan</CardTitle>
-              <CardDescription>Tren pengeluaran dalam satu bulan terakhir.</CardDescription>
-            </CardHeader>
-            <CardContent className="h-[400px] mt-4">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+            <div className="mb-8 md:mb-10 text-center md:text-left">
+              <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Mingguan</h2>
+              <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Tren pengeluaran dalam satu bulan terakhir</p>
+            </div>
+            <div className="h-[400px]">
               <ChartContainer config={chartConfig} className="h-full w-full">
                 <BarChart data={weeklyData}>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tickMargin={10} />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 800 }} tickMargin={20} />
                   <YAxis hide />
-                  <Tooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="total" fill="#4f46e5" radius={[8, 8, 0, 0]} />
+                  <Tooltip cursor={{ fill: '#f8fafc' }} content={<ChartTooltipContent />} />
+                  <Bar dataKey="total" fill="#e2e8f0" radius={[12, 12, 12, 12]}>
+                    {weeklyData.map((_entry, index) => (
+                      <Cell key={`cell-${index}`} fill={index === weeklyData.length - 1 ? '#7c3aed' : '#e2e8f0'} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ChartContainer>
-            </CardContent>
+            </div>
           </Card>
         </TabsContent>
 
         <TabsContent value="monthly">
-          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-            <CardHeader>
-              <CardTitle>Statistik Bulanan</CardTitle>
-              <CardDescription>Ringkasan biaya sepanjang tahun berjalan.</CardDescription>
-            </CardHeader>
-            <CardContent className="h-[400px] mt-4">
+          <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-6 md:p-10">
+            <div className="mb-8 md:mb-10 text-center md:text-left">
+              <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">Statistik Bulanan</h2>
+              <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-1">Ringkasan biaya sepanjang tahun berjalan</p>
+            </div>
+            <div className="h-[400px]">
               <ChartContainer config={chartConfig} className="h-full w-full">
                 <BarChart data={monthlyData}>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tickMargin={10} />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 800 }} tickMargin={20} />
                   <YAxis hide />
-                  <Tooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="total" fill="#10b981" radius={[8, 8, 0, 0]} />
+                  <Tooltip cursor={{ fill: '#f8fafc' }} content={<ChartTooltipContent />} />
+                  <Bar dataKey="total" fill="#e2e8f0" radius={[12, 12, 12, 12]}>
+                    {monthlyData.map((_entry, index) => (
+                      <Cell key={`cell-${index}`} fill={index === monthlyData.length - 1 ? '#059669' : '#e2e8f0'} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ChartContainer>
-            </CardContent>
+            </div>
           </Card>
         </TabsContent>
       </Tabs>

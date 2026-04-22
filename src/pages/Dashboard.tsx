@@ -1,102 +1,164 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React from 'react';
+import { Card } from '@/components/ui/card';
 import { MOCK_EXPENSES, formatIDR } from '@/lib/data';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Info, PlusCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { TrendingUp, TrendingDown, Bell, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 
+const CATEGORY_STYLES = {
+  PROTEIN: 'bg-green-100 text-green-700',
+  BUMBU: 'bg-purple-100 text-purple-700',
+  SEMBAKO: 'bg-slate-100 text-slate-600',
+  SAYUR: 'bg-emerald-50 text-emerald-600',
+  LAINNYA: 'bg-slate-100 text-slate-500'
+};
+
 export default function Dashboard() {
-  const [hasInputToday, setHasInputToday] = useState(false);
-
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const exists = MOCK_EXPENSES.some(e => e.date === today);
-    setHasInputToday(exists);
-  }, []);
-
   const totalToday = MOCK_EXPENSES
     .filter(e => e.date === new Date().toISOString().split('T')[0])
     .reduce((sum, e) => sum + e.total, 0);
 
-  const totalThisWeek = MOCK_EXPENSES.reduce((sum, e) => sum + e.total, 0); // Mocked as all recent
-  const totalThisMonth = MOCK_EXPENSES.reduce((sum, e) => sum + e.total, 0); // Mocked as all recent
+  const totalThisWeek = 28140000; // Mocked for design parity
+  const totalThisMonth = 102500000; // Mocked for design parity
+
+  const stats = [
+    { 
+      title: 'BELANJA HARI INI', 
+      amount: totalToday, 
+      trend: '+12%', 
+      trendType: 'up', 
+      chart: [20, 45, 30, 60, 100], 
+      chartColor: 'bg-blue-600',
+      baseColor: 'bg-blue-100'
+    },
+    { 
+      title: 'MINGGU INI', 
+      amount: totalThisWeek, 
+      trend: '-4.5%', 
+      trendType: 'down', 
+      chart: [30, 40, 50, 70, 40, 90, 30], 
+      chartColor: 'bg-violet-600',
+      baseColor: 'bg-violet-100'
+    },
+    { 
+      title: 'BULAN INI', 
+      amount: totalThisMonth / 1000, 
+      isK: true,
+      trend: '+21%', 
+      trendType: 'up', 
+      chart: [40, 50, 60, 80], 
+      chartColor: 'bg-emerald-700',
+      baseColor: 'bg-emerald-200'
+    },
+  ];
 
   const recentExpenses = MOCK_EXPENSES.slice(0, 5);
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Halo, Admin Catering!</h1>
-        <p className="text-slate-500 mt-1">Pantau biaya bahan baku dapur Anda hari ini.</p>
+    <div className="space-y-10 relative">
+      {/* Header & Greeting */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-4xl font-bold text-slate-800 tracking-tight">Halo, Admin Catering!</h1>
+          <p className="text-slate-500 mt-2 font-medium text-sm md:text-base">Pantau biaya bahan baku dapur Anda hari ini.</p>
+        </div>
+        <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-full shadow-sm w-fit">
+          <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+          <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-widest">Status Budget: Aman</span>
+        </div>
       </div>
 
-      {!hasInputToday && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center justify-between shadow-sm"
-        >
-          <div className="flex items-center gap-4">
-            <div className="bg-amber-500 p-2.5 rounded-xl">
-              <Info className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-amber-900">Smart Reminder</p>
-              <p className="text-xs text-amber-700">Anda belum menginput transaksi pengeluaran untuk hari ini.</p>
-            </div>
-          </div>
-          <Button asChild variant="ghost" className="text-xs font-bold text-amber-900 px-4 py-2 hover:bg-amber-100 rounded-lg uppercase tracking-wider">
-            <Link to="/new-expense">Input Sekarang</Link>
-          </Button>
-        </motion.div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { title: 'Hari Ini', amount: totalToday, color: 'bg-blue-500' },
-          { title: 'Minggu Ini', amount: totalThisWeek, color: 'bg-green-500' },
-          { title: 'Bulan Ini', amount: totalThisMonth, color: 'bg-purple-500' },
-        ].map((stat, idx) => (
-          <Card key={idx} className="bg-white p-6 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 relative overflow-hidden flex flex-col justify-between h-32">
-            <div className="space-y-1">
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{stat.title}</p>
-              <h3 className="text-2xl font-black text-slate-900">{formatIDR(stat.amount)}</h3>
-            </div>
-            <div className={`h-1 w-12 ${stat.color} rounded-full`}></div>
-          </Card>
+      {/* Metric Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {stats.map((stat, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.1 }}
+          >
+            <Card className="bg-white p-6 md:p-8 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+              <div className="flex justify-between items-start mb-6">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{stat.title}</p>
+                <div className={`p-1.5 rounded-lg flex items-center gap-1 ${stat.trendType === 'up' ? 'text-emerald-600' : 'text-rose-500'}`}>
+                  {stat.trendType === 'up' ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                  <span className="text-[11px] font-black tracking-tight">{stat.trend}</span>
+                </div>
+              </div>
+              
+              <div className="flex items-end justify-between">
+                <h3 className="text-3xl font-black text-slate-800 tracking-tighter">
+                  Rp {stat.isK ? `${stat.amount.toLocaleString('id-ID')}k` : stat.amount.toLocaleString('id-ID')}
+                </h3>
+                
+                {/* Mini Chart */}
+                <div className="flex items-end gap-1.5 h-12 pb-1">
+                  {stat.chart.map((val, i) => (
+                    <div 
+                      key={i} 
+                      className={`w-4 rounded-md transition-all duration-500 ${i === stat.chart.length - 1 ? stat.chartColor : stat.baseColor}`}
+                      style={{ height: `${val}%` }}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </motion.div>
         ))}
       </div>
 
-      <Card className="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col">
-        <CardHeader className="px-6 py-5 border-b border-slate-100 flex flex-row items-center justify-between pb-4">
-          <CardTitle className="font-bold text-slate-800">Belanja Terbaru</CardTitle>
-          <Button variant="ghost" asChild className="text-xs font-bold text-blue-600 hover:underline px-0 h-auto">
-            <Link to="/data">Lihat Semua</Link>
-          </Button>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader className="bg-slate-50/50">
-              <TableRow>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Tanggal</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Nama Bahan</TableHead>
-                <TableHead className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Total Biaya</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="divide-y divide-slate-50">
-              {recentExpenses.map((expense) => (
-                <TableRow key={expense.id} className="hover:bg-slate-50/50 transition-colors border-none">
-                  <TableCell className="px-6 py-4 text-sm font-medium text-slate-500">{expense.date}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm font-bold text-slate-800">{expense.name}</TableCell>
-                  <TableCell className="px-6 py-4 text-sm font-black text-right text-slate-900">{formatIDR(expense.total)}</TableCell>
-                </TableRow>
+      {/* Recent Transactions Table */}
+      <Card className="bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-2 overflow-hidden">
+        <div className="p-6 md:p-8 flex items-center justify-between gap-4">
+          <h2 className="text-lg md:text-xl font-bold text-slate-800 tracking-tight">Transaksi Belanja Terbaru</h2>
+          <Link to="/data" className="text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors shrink-0">Lihat Semua</Link>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50/50">
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest min-w-[120px]">Tanggal</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest min-w-[150px]">Nama Bahan</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Kategori</th>
+                <th className="px-4 md:px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Total Biaya</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-50">
+              {recentExpenses.map((expense, idx) => (
+                <tr key={expense.id} className="hover:bg-slate-50/50 transition-colors group">
+                  <td className="px-4 md:px-8 py-5">
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-bold text-slate-600">{new Date(expense.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
+                      {idx === 0 && (
+                        <span className="bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">Baru</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-4 md:px-8 py-5">
+                    <span className="text-sm font-bold text-slate-800">{expense.name}</span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5 text-center">
+                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${CATEGORY_STYLES[expense.category] || CATEGORY_STYLES.LAINNYA}`}>
+                      {expense.category}
+                    </span>
+                  </td>
+                  <td className="px-4 md:px-8 py-5 text-right">
+                    <span className="text-sm font-black text-blue-600 whitespace-nowrap">{formatIDR(expense.total)}</span>
+                  </td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
-        </CardContent>
+            </tbody>
+          </table>
+        </div>
       </Card>
+
+      {/* FAB */}
+      <Link 
+        to="/new-expense" 
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 p-4 md:p-5 bg-blue-600 rounded-full shadow-2xl shadow-blue-500/50 text-white hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all z-50"
+      >
+        <ShoppingCart className="w-6 h-6 md:w-8 md:h-8" />
+      </Link>
     </div>
   );
 }
