@@ -37,7 +37,7 @@ export default function ExpenseList() {
     toast.success(`${name} telah dihapus dari daftar.`);
   };
 
-  const categories = ['ALL', 'PROTEIN', 'BUMBU', 'SEMBAKO', 'SAYUR', 'LAINNYA'];
+  const categories = ['ALL', 'Daging & Seafood', 'Bahan Pokok', 'Bumbu & Rempah', 'Packaging', 'Susu & Telur', 'Sayuran & Buah', 'Gas & Utilitas', 'Minuman'];
 
   return (
     <div className="space-y-10">
@@ -122,13 +122,15 @@ export default function ExpenseList() {
                       <span className="text-sm font-bold text-slate-800 dark:text-slate-100">{expense.name}</span>
                     </td>
                     <td className="px-4 md:px-8 py-5 text-center">
-                      <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest 
-                        ${expense.category === 'PROTEIN' ? 'bg-green-100 text-green-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 
-                          expense.category === 'BUMBU' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' :
-                          expense.category === 'SAYUR' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400' :
-                          expense.category === 'SEMBAKO' ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' :
-                          'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'}`}>
-                        {expense.category}
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                        {expense.category === 'Daging & Seafood' ? '🥩' : 
+                         expense.category === 'Bahan Pokok' ? '🌾' :
+                         expense.category === 'Bumbu & Rempah' ? '🧂' :
+                         expense.category === 'Packaging' ? '📦' :
+                         expense.category === 'Susu & Telur' ? '🥚' :
+                         expense.category === 'Sayuran & Buah' ? '🥦' :
+                         expense.category === 'Gas & Utilitas' ? '🔥' :
+                         expense.category === 'Minuman' ? '🥤' : '🏷️'} {expense.category}
                       </span>
                     </td>
                     <td className="px-4 md:px-8 py-5">
