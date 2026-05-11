@@ -11,6 +11,14 @@ export interface Expense {
   category: 'PROTEIN' | 'BUMBU' | 'SEMBAKO' | 'SAYUR' | 'LAINNYA';
 }
 
+export interface Supplier {
+  id: string;
+  name: string;
+  phone: string;
+  address: string;
+  notes: string;
+}
+
 export const MOCK_EXPENSES: Expense[] = [
   { id: '1', date: format(new Date(), 'yyyy-MM-dd'), name: 'Daging Sapi Wagyu A5', qty: 2, unit: 'kg', pricePerUnit: 725000, total: 1450000, category: 'PROTEIN' },
   { id: '2', date: format(new Date(), 'yyyy-MM-dd'), name: 'Bawang Merah & Putih', qty: 5, unit: 'kg', pricePerUnit: 49000, total: 245000, category: 'BUMBU' },
@@ -19,6 +27,30 @@ export const MOCK_EXPENSES: Expense[] = [
   { id: '5', date: format(subDays(new Date(), 2), 'yyyy-MM-dd'), name: 'Beras Pandan Wangi 50kg', qty: 1, unit: 'karung', pricePerUnit: 650000, total: 650000, category: 'SEMBAKO' },
   { id: '6', date: format(subDays(new Date(), 3), 'yyyy-MM-dd'), name: 'Ayam Fillet', qty: 10, unit: 'kg', pricePerUnit: 45000, total: 450000, category: 'PROTEIN' },
   { id: '7', date: format(subDays(new Date(), 4), 'yyyy-MM-dd'), name: 'Telur Ayam Broiler', qty: 10, unit: 'kg', pricePerUnit: 28000, total: 280000, category: 'SEMBAKO' },
+];
+
+export const MOCK_SUPPLIERS: Supplier[] = [
+  {
+    id: '1',
+    name: 'Pasar Induk Kramat Jati',
+    phone: '08123456789',
+    address: 'Jl. Raya Bogor KM 29',
+    notes: 'Sayur & buah segar',
+  },
+  {
+    id: '2',
+    name: 'Toko Daging Pak Haji',
+    phone: '08198765432',
+    address: 'Pasar Minggu Blok A12',
+    notes: 'Daging sapi & ayam pilihan',
+  },
+  {
+    id: '3',
+    name: 'Toko Bumbu Bu Sri',
+    phone: '08567891234',
+    address: 'Kios Bumbu No. 45',
+    notes: 'Bumbu lengkap',
+  }
 ];
 
 export const formatIDR = (amount: number) => {

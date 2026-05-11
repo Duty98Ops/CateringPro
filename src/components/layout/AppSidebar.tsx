@@ -1,4 +1,4 @@
-import { Utensils, LayoutDashboard, Database, PlusCircle, BarChart3, User, LogOut } from 'lucide-react';
+import { Utensils, LayoutDashboard, Database, PlusCircle, Store, BarChart3, User, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Sidebar,
@@ -16,6 +16,7 @@ const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Database, label: 'Daftar Belanja', path: '/data' },
   { icon: PlusCircle, label: 'Tambah Belanja', path: '/new-expense' },
+  { icon: Store, label: 'Supplier', path: '/supplier' },
   { icon: BarChart3, label: 'Laporan', path: '/reports' },
 ];
 

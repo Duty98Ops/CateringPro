@@ -8,6 +8,7 @@ import ExpenseList from '@/pages/ExpenseList';
 import NewExpense from '@/pages/NewExpense';
 import Reports from '@/pages/Reports';
 import Profile from '@/pages/Profile';
+import Supplier from '@/pages/Supplier';
 import Login from '@/pages/Login';
 import AppLayout from '@/components/layout/AppLayout';
 
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/data" element={<ExpenseList />} />
               <Route path="/new-expense" element={<NewExpense />} />
+              <Route path="/supplier" element={<Supplier />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
