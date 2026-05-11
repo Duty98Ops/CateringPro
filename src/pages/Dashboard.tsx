@@ -28,8 +28,8 @@ export default function Dashboard() {
       trend: '+12%', 
       trendType: 'up', 
       chart: [20, 45, 30, 60, 100], 
-      chartColor: 'bg-blue-600',
-      baseColor: 'bg-blue-100'
+      chartColor: 'bg-[#a66a5e]',
+      baseColor: 'bg-[#a66a5e]/20'
     },
     { 
       title: 'MINGGU INI', 
@@ -111,7 +111,7 @@ export default function Dashboard() {
       <Card className="bg-white dark:bg-slate-900 rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border-none p-2 overflow-hidden">
         <div className="p-6 md:p-8 flex items-center justify-between gap-4">
           <h2 className="text-lg md:text-xl font-bold text-slate-800 dark:text-white tracking-tight">Transaksi Belanja Terbaru</h2>
-          <Link to="/data" className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 transition-colors shrink-0">Lihat Semua</Link>
+          <Link to="/data" className="text-xs font-bold text-[#a66a5e] hover:opacity-80 transition-colors shrink-0">Lihat Semua</Link>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -130,7 +130,7 @@ export default function Dashboard() {
                     <div className="flex items-center gap-3">
                       <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{new Date(expense.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</span>
                       {idx === 0 && (
-                        <span className="bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">Baru</span>
+                        <span className="bg-[#a66a5e] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-tighter">Baru</span>
                       )}
                     </div>
                   </td>
@@ -143,7 +143,7 @@ export default function Dashboard() {
                     </span>
                   </td>
                   <td className="px-4 md:px-8 py-5 text-right">
-                    <span className="text-sm font-black text-blue-600 dark:text-blue-400 whitespace-nowrap">{formatIDR(expense.total)}</span>
+                    <span className="text-sm font-black text-[#a66a5e] whitespace-nowrap">{formatIDR(expense.total)}</span>
                   </td>
                 </tr>
               ))}
@@ -155,7 +155,7 @@ export default function Dashboard() {
       {/* FAB */}
       <Link 
         to="/new-expense" 
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 p-4 md:p-5 bg-blue-600 rounded-full shadow-2xl shadow-blue-500/50 text-white hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all z-50"
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 p-4 md:p-5 bg-[#a66a5e] rounded-full shadow-2xl shadow-black/20 text-white hover:opacity-90 hover:scale-105 active:scale-95 transition-all z-50"
       >
         <ShoppingCart className="w-6 h-6 md:w-8 md:h-8" />
       </Link>

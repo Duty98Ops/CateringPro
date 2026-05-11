@@ -35,7 +35,7 @@ export default function Profile() {
                 className="w-32 h-32 rounded-3xl object-cover border-4 border-white dark:border-slate-800 shadow-2xl transition-transform group-hover:scale-105 duration-300"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute -bottom-2 -right-2 bg-blue-600 p-3 rounded-2xl border-4 border-white dark:border-slate-800 shadow-lg cursor-pointer hover:bg-blue-700 transition-all hover:scale-110 active:scale-95">
+              <div className="absolute -bottom-2 -right-2 bg-[#a66a5e] p-3 rounded-2xl border-4 border-white dark:border-slate-800 shadow-lg cursor-pointer hover:opacity-90 transition-all hover:scale-110 active:scale-95">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={3}><path d="M12 4v16m8-8H4" /></svg>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function Profile() {
               <Input
                 id="name"
                 defaultValue={user.name}
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
               />
             </div>
             <div className="space-y-3">
@@ -59,7 +59,7 @@ export default function Profile() {
                 id="email"
                 type="email"
                 defaultValue={user.email}
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
               />
             </div>
             <div className="space-y-3 col-span-1 md:col-span-2">
@@ -68,11 +68,11 @@ export default function Profile() {
                 id="pass"
                 type="password"
                 placeholder="••••••••"
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
               />
             </div>
             <div className="col-span-1 md:col-span-2 flex justify-center pt-6">
-              <Button type="submit" className="h-14 rounded-2xl px-16 bg-blue-600 hover:bg-blue-700 text-white font-black shadow-xl shadow-blue-200 dark:shadow-blue-900/20 transition-all active:scale-95 w-full md:w-auto">
+              <Button type="submit" className="h-14 rounded-2xl px-16 bg-[#a66a5e] hover:opacity-90 text-white font-black shadow-xl shadow-black/5 transition-all active:scale-95 w-full md:w-auto">
                 Perbarui Profil
               </Button>
             </div>

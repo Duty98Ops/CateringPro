@@ -67,7 +67,7 @@ export default function NewExpense() {
               <Input
                 id="date"
                 type="date"
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
                 value={formData.date}
                 onChange={(e) => handleChange('date', e.target.value)}
               />
@@ -76,12 +76,12 @@ export default function NewExpense() {
             <div className="space-y-3">
               <Label htmlFor="category" className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest pl-1">Kategori Bahan</Label>
               <Select value={formData.category} onValueChange={(val) => handleChange('category', val)}>
-                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100">
+                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100">
                   <SelectValue placeholder="Pilih kategori" />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-xl dark:bg-slate-800 dark:text-slate-100">
                   {['PROTEIN', 'BUMBU', 'SEMBAKO', 'SAYUR', 'LAINNYA'].map(c => (
-                    <SelectItem key={c} value={c} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-blue-600 focus:text-white dark:focus:bg-blue-500 transition-colors uppercase tracking-widest text-[10px]">{c}</SelectItem>
+                    <SelectItem key={c} value={c} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-[#a66a5e] focus:text-white transition-colors uppercase tracking-widest text-[10px]">{c}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -92,7 +92,7 @@ export default function NewExpense() {
               <Input
                 id="name"
                 placeholder="cth: Ayam Fillet, Beras Ramos, dll"
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
                 value={formData.name}
                 onChange={(e) => handleChange('name', e.target.value)}
               />
@@ -104,7 +104,7 @@ export default function NewExpense() {
                 id="qty"
                 type="number"
                 placeholder="0"
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100 uppercase"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100 uppercase"
                 value={formData.qty}
                 onChange={(e) => handleChange('qty', e.target.value)}
               />
@@ -113,12 +113,12 @@ export default function NewExpense() {
             <div className="space-y-3">
               <Label htmlFor="unit" className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest pl-1">Satuan Unit</Label>
               <Select value={formData.unit} onValueChange={(val) => handleChange('unit', val)}>
-                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100">
+                <SelectTrigger className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100">
                   <SelectValue placeholder="Pilih satuan" />
                 </SelectTrigger>
                 <SelectContent className="rounded-2xl border-none shadow-xl dark:bg-slate-800 dark:text-slate-100">
                   {['kg', 'liter', 'gram', 'pcs', 'karung', 'dus', 'ikat'].map(u => (
-                    <SelectItem key={u} value={u} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-blue-600 focus:text-white dark:focus:bg-blue-500 transition-colors uppercase tracking-widest text-[10px]">{u}</SelectItem>
+                    <SelectItem key={u} value={u} className="cursor-pointer py-3 px-4 font-bold rounded-xl focus:bg-[#a66a5e] focus:text-white transition-colors uppercase tracking-widest text-[10px]">{u}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -130,7 +130,7 @@ export default function NewExpense() {
                 id="price"
                 type="number"
                 placeholder="0"
-                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
+                className="h-14 rounded-2xl bg-slate-50/50 dark:bg-slate-800/30 border-slate-100 dark:border-slate-800/50 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/10 transition-all px-6 font-bold text-slate-700 dark:text-slate-100"
                 value={formData.price}
                 onChange={(e) => handleChange('price', e.target.value)}
               />
@@ -140,11 +140,11 @@ export default function NewExpense() {
               <motion.div
                 initial={{ scale: 0.98 }}
                 animate={{ scale: 1 }}
-                className="bg-blue-600 dark:bg-blue-700 p-6 md:p-8 rounded-[32px] flex items-center justify-between shadow-2xl shadow-blue-500/30 dark:shadow-blue-950/40 overflow-hidden relative"
+                className="bg-[#a66a5e] p-6 md:p-8 rounded-[32px] flex items-center justify-between shadow-[0_20px_50px_rgba(166,106,94,0.3)] overflow-hidden relative"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
                 <div className="relative z-10">
-                  <p className="text-[10px] font-black text-blue-100 dark:text-blue-200 uppercase tracking-[0.2em]">Total Estimasi Biaya</p>
+                  <p className="text-[10px] font-black text-[#fdf8f7] uppercase tracking-[0.2em]">Total Estimasi Biaya</p>
                   <p className="text-2xl md:text-4xl font-black text-white mt-1 tracking-tighter">{formatIDR(totalCost)}</p>
                 </div>
                 <div className="bg-white/20 p-3 md:p-4 rounded-2xl relative z-10 backdrop-blur-sm shadow-xl">
@@ -157,7 +157,7 @@ export default function NewExpense() {
               <Button type="button" variant="ghost" className="h-12 md:h-14 rounded-2xl px-10 font-bold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 order-2 md:order-1" asChild>
                 <Link to="/dashboard">Batal</Link>
               </Button>
-              <Button type="submit" className="h-12 md:h-14 rounded-2xl px-16 bg-blue-600 hover:bg-blue-700 text-white font-black shadow-xl shadow-blue-200 dark:shadow-blue-900/20 transition-all active:scale-95 order-1 md:order-2">
+              <Button type="submit" className="h-12 md:h-14 rounded-2xl px-16 bg-[#a66a5e] hover:opacity-90 text-white font-black shadow-xl shadow-black/5 dark:shadow-black/20 transition-all active:scale-95 order-1 md:order-2">
                 Simpan Transaksi
               </Button>
             </div>

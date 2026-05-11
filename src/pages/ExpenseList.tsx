@@ -51,7 +51,7 @@ export default function ExpenseList() {
             <Filter className="w-4 h-4" />
             <span>Filter</span>
           </Button>
-          <Button className="h-10 md:h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-lg shadow-blue-200 dark:shadow-blue-900/20 px-6 md:px-8 font-bold transition-all text-xs md:text-sm">
+          <Button className="h-10 md:h-12 bg-[#a66a5e] hover:opacity-90 text-white rounded-2xl shadow-lg shadow-black/5 dark:shadow-black/20 px-6 md:px-8 font-bold transition-all text-xs md:text-sm">
             Ekspor Data
           </Button>
         </div>
@@ -64,7 +64,7 @@ export default function ExpenseList() {
             <input 
               type="text" 
               placeholder="Cari transaksi..."
-              className="w-full bg-slate-50/50 dark:bg-slate-800/30 border-none rounded-2xl py-3 pl-11 pr-4 text-sm focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all outline-none placeholder:text-slate-400 border border-slate-100 dark:border-slate-800"
+              className="w-full bg-slate-50/50 dark:bg-slate-800/30 border-none rounded-2xl py-3 pl-11 pr-4 text-sm focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#a66a5e]/20 transition-all outline-none placeholder:text-slate-400 border border-slate-100 dark:border-slate-800"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -72,12 +72,12 @@ export default function ExpenseList() {
           
           <div className="w-full md:w-64 flex items-center gap-2">
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="bg-slate-50/50 dark:bg-slate-800/30 border-none rounded-2xl py-6 px-4 text-sm focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 transition-all text-slate-600 dark:text-slate-300 font-bold">
+              <SelectTrigger className="bg-slate-50/50 dark:bg-slate-800/30 border-none rounded-2xl py-6 px-4 text-sm focus:ring-2 focus:ring-[#a66a5e]/20 transition-all text-slate-600 dark:text-slate-300 font-bold">
                 <SelectValue placeholder="Kategori" />
               </SelectTrigger>
               <SelectContent className="rounded-2xl border-none shadow-xl dark:bg-slate-800 dark:text-slate-100">
                 {categories.map(cat => (
-                  <SelectItem key={cat} value={cat} className="rounded-xl focus:bg-blue-50 dark:focus:bg-blue-900/30 focus:text-blue-600 dark:focus:text-blue-400 font-bold text-xs">
+                  <SelectItem key={cat} value={cat} className="rounded-xl focus:bg-[#a66a5e]/10 focus:text-[#a66a5e] dark:focus:text-[#a66a5e] font-bold text-xs">
                     {cat === 'ALL' ? 'Semua Kategori' : cat}
                   </SelectItem>
                 ))}
@@ -134,7 +134,7 @@ export default function ExpenseList() {
                     <td className="px-4 md:px-8 py-5">
                       <span className="text-sm font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap">{expense.qty} {expense.unit}</span>
                     </td>
-                    <td className="px-4 md:px-8 py-5 text-right text-sm font-black text-blue-600 dark:text-blue-400 whitespace-nowrap">
+                    <td className="px-4 md:px-8 py-5 text-right text-sm font-black text-[#a66a5e] whitespace-nowrap">
                       {formatIDR(expense.total)}
                     </td>
                     <td className="px-4 md:px-8 py-5 text-right">
@@ -145,7 +145,7 @@ export default function ExpenseList() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-40 rounded-2xl border-none shadow-xl dark:bg-slate-800 dark:text-slate-100">
-                          <DropdownMenuItem className="flex items-center gap-2 cursor-pointer py-2 px-4 focus:bg-blue-50 dark:focus:bg-blue-900/30 focus:text-blue-600 dark:focus:text-blue-400 transition-colors rounded-xl">
+                          <DropdownMenuItem className="flex items-center gap-2 cursor-pointer py-2 px-4 focus:bg-[#a66a5e]/10 focus:text-[#a66a5e] transition-colors rounded-xl">
                             <Edit2 className="w-4 h-4" />
                             <span className="font-bold text-xs">Edit</span>
                           </DropdownMenuItem>

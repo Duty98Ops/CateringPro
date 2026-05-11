@@ -9,7 +9,6 @@ import NewExpense from '@/pages/NewExpense';
 import Reports from '@/pages/Reports';
 import Profile from '@/pages/Profile';
 import Supplier from '@/pages/Supplier';
-import Login from '@/pages/Login';
 import AppLayout from '@/components/layout/AppLayout';
 
 export default function App() {
@@ -27,7 +26,6 @@ export default function App() {
       <TooltipProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route element={<AppLayout />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
