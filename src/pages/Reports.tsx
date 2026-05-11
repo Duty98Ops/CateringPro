@@ -42,6 +42,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export default function Reports() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [dateFrom, setDateFrom] = useState('2026-04-12');
   const [dateTo, setDateTo] = useState('2026-05-11');
 
@@ -141,32 +147,34 @@ export default function Reports() {
       {/* Main Bar Chart */}
       <Card className="bg-white dark:bg-[#1a1614] border-none rounded-[32px] p-8 md:p-10 shadow-[0_4px_20px_rgba(0,0,0,0.02)]">
         <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-8 border-l-4 border-[#a66a5e] pl-4">Pengeluaran per Hari</h4>
-        <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={dailyData} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" className="dark:stroke-[#2d2622]" />
-              <XAxis 
-                dataKey="name" 
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
-                dy={10}
-              />
-              <YAxis 
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
-                tickFormatter={(value) => `Rp ${value >= 1000000 ? (value/1000000).toFixed(1) + 'jt' : (value/1000).toFixed(0) + 'rb'}`}
-              />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.02)', className: 'dark:fill-white/5' }} />
-              <Bar 
-                dataKey="total" 
-                fill="#8cb39d" 
-                radius={[8, 8, 8, 8]}
-                barSize={60}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="h-[400px] w-full min-h-0 min-w-0">
+          {isMounted && (
+            <ResponsiveContainer width="100%" height={400} minWidth={0}>
+              <BarChart data={dailyData} margin={{ top: 20, right: 30, left: 40, bottom: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" className="dark:stroke-[#2d2622]" />
+                <XAxis 
+                  dataKey="name" 
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
+                  dy={10}
+                />
+                <YAxis 
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
+                  tickFormatter={(value) => `Rp ${value >= 1000000 ? (value/1000000).toFixed(1) + 'jt' : (value/1000).toFixed(0) + 'rb'}`}
+                />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.02)', className: 'dark:fill-white/5' }} />
+                <Bar 
+                  dataKey="total" 
+                  fill="#8cb39d" 
+                  radius={[8, 8, 8, 8]}
+                  barSize={60}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </Card>
 

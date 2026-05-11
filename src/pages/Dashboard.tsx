@@ -85,6 +85,12 @@ const CustomLegend = (props: any) => {
 };
 
 export default function Dashboard() {
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className="space-y-8 pb-10">
       {/* Metric Cards */}
@@ -130,32 +136,34 @@ export default function Dashboard() {
             <span className="text-xl">📈</span>
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Tren Pengeluaran 30 Hari</h4>
           </div>
-          <div className="h-[400px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dailyTrendData} margin={{ top: 20, right: 10, left: 20, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" className="dark:stroke-[#2d2622]" />
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
-                  dy={10}
-                />
-                <YAxis 
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
-                  tickFormatter={(value) => `Rp ${value >= 1000000 ? (value/1000000).toFixed(1) + 'jt' : (value/1000).toFixed(0) + 'rb'}`}
-                />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.02)', className: 'dark:fill-white/5' }} />
-                <Bar 
-                  dataKey="total" 
-                  fill="#e58c73" 
-                  radius={[6, 6, 6, 6]}
-                  barSize={24}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+          <div className="h-[400px] w-full min-h-0 min-w-0">
+            {isMounted && (
+              <ResponsiveContainer width="100%" height={400} minWidth={0}>
+                <BarChart data={dailyTrendData} margin={{ top: 20, right: 10, left: 20, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" className="dark:stroke-[#2d2622]" />
+                  <XAxis 
+                    dataKey="name" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
+                    dy={10}
+                  />
+                  <YAxis 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
+                    tickFormatter={(value) => `Rp ${value >= 1000000 ? (value/1000000).toFixed(1) + 'jt' : (value/1000).toFixed(0) + 'rb'}`}
+                  />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.02)', className: 'dark:fill-white/5' }} />
+                  <Bar 
+                    dataKey="total" 
+                    fill="#e58c73" 
+                    radius={[6, 6, 6, 6]}
+                    barSize={24}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </Card>
 
@@ -165,26 +173,28 @@ export default function Dashboard() {
             <span className="text-xl">🏷️</span>
             <h4 className="text-xs font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Komposisi Kategori</h4>
           </div>
-          <div className="flex-1 min-h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={categoryData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {categoryData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend content={<CustomLegend />} />
-              </PieChart>
-            </ResponsiveContainer>
+          <div className="flex-1 h-[350px] w-full min-h-0 min-w-0">
+            {isMounted && (
+              <ResponsiveContainer width="100%" height={350} minWidth={0}>
+                <PieChart>
+                  <Pie
+                    data={categoryData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={100}
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {categoryData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend content={<CustomLegend />} />
+                </PieChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </Card>
       </div>
